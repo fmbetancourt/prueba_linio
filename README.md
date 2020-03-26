@@ -38,66 +38,55 @@ Esta función retornará **True** si $num es múltiplo de $mult, y **False** en 
     }
 ```
 
-Por último, se desarrolló la función que será llamada para la ejecución principal del Challenge. Esta función la llamé _main_ y recibe un único parámetro llamado _$es_test_ (por defecto es **False**), sólo para diferenciar si el llamado del mismo viene desde PHPUnit.
+Por último, se desarrolló la función que realiza la lógica solicitada en el Challenge. Esta función la llamé _resultados_.
 ```
-    public function main($es_test = false)
+    public function resultado()
 ```
-Al inicio, simplemente se define cómo será mostrado el salto de línea, esto solamente con fines estéticos para que sea legible la información final.
-```
-    $salto_linea = "<br/>";
-    if ($es_test){ # Unico IF (Sólo para dar formato al salto de linea)
-        $salto_linea = "\n";
-    }
-```
-En esta sección fue utilizado el único **if** permitido para el Challenge 🤓
 
-Posteriormente, se recorre la variable _valores_ del objeto _Linio_ para determinar cúales son múltiplos y cuales no: 
+Posteriormente, se recorre el atributo _valores_ del objeto _Linio_ para determinar cúales son múltiplos y cuales no: 
 ```
     foreach ($this->valores as $num) {
-        echo $salto_linea;
         switch (true){
             case ($this->multiplo($num,15)):
-                echo "Linianos";
+                $valor = "Linianos";
                 break;
             case ($this->multiplo($num,5)):
-                echo "IT";
+                $valor =  "IT";
                 break;
             case ($this->multiplo($num,3)):
-                echo "Linio";
+                $valor =  "Linio";
                 break;
             default:
-                echo $num;
+                $valor =  $num;
                 break;
         }
+        $resultado[$num] = $valor;
     }
 ```
 
 En resumen, la función principal quedaría de la siguiente forma:
 ```
-    public function main($es_test = false){
-        $salto_linea = "<br/>";
-        if ($es_test){ # Unico IF (Sólo para dar formato al salto de linea)
-            $salto_linea = "\n";
-        }
+    public function resultado(){
+        $resultado = array();
         foreach ($this->valores as $num) {
-            echo $salto_linea;
             switch (true){
                 case ($this->multiplo($num,15)):
-                    echo "Linianos";
+                    $valor = "Linianos";
                     break;
                 case ($this->multiplo($num,5)):
-                    echo "IT";
+                    $valor =  "IT";
                     break;
                 case ($this->multiplo($num,3)):
-                    echo "Linio";
+                    $valor =  "Linio";
                     break;
                 default:
-                    echo $num;
+                    $valor =  $num;
                     break;
             }
+            $resultado[$num] = $valor;
         }
 
-        return true;
+        return $resultado;
     }
 ```
 
@@ -106,10 +95,10 @@ En resumen, la función principal quedaría de la siguiente forma:
 Se desarrolló con la propósito de poder ejecutarse, tanto por entorno web, como con PHPUnit.
 
 ### Navegador Web 🔩
-En la raiz del proyecto, se tiene el archivo _**index.php**_, que simplemente tiene la instanciación a la clase **Linio** y la posterior llamada a la función _main_
+En la raiz del proyecto, se tiene el archivo _**index.php**_, que simplemente tiene la instanciación a la clase **Linio** y la posterior llamada a la función _resultados_
 ```
     $prueba = new Linio();
-    $prueba->main();
+    $datos = $prueba->resultado();
 ```
 el cual simplemente lo ejecutamos desde cualquier navegador con una URL parecida a ls siguiente:
 ```

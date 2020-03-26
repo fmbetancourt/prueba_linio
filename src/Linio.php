@@ -28,35 +28,32 @@ class Linio{
     }
 
     /**
-     * Función que ejecuta la lógica del ejercicio
+     * Función que arma un array asociativo donde el key será el
+     * numero correlativo y el valor el resultado correspondiente
      *
-     * @param bool $test Indica si la llamada es realizada desde el test de PHPUnit
-     * @return bool
+     * @return array
      */
-    public function main($es_test = false){
-        $salto_linea = "<br/>";
-        if ($es_test){ # Unico IF (Sólo para dar formato al salto de linea)
-            $salto_linea = "\n";
-        }
+    public function resultado(){
+        $resultado = array();
         foreach ($this->valores as $num) {
-            echo $salto_linea;
             switch (true){
                 case ($this->multiplo($num,15)):
-                    echo "Linianos";
+                    $valor = "Linianos";
                     break;
                 case ($this->multiplo($num,5)):
-                    echo "IT";
+                    $valor =  "IT";
                     break;
                 case ($this->multiplo($num,3)):
-                    echo "Linio";
+                    $valor =  "Linio";
                     break;
                 default:
-                    echo $num;
+                    $valor =  $num;
                     break;
             }
+            $resultado[$num] = $valor;
         }
 
-        return true;
+        return $resultado;
     }
 
 }

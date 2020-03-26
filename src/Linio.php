@@ -33,9 +33,9 @@ class Linio{
      * @param bool $test Indica si la llamada es realizada desde el test de PHPUnit
      * @return bool
      */
-    public function main($test = false){
+    public function main($es_test = false){
         $salto_linea = "<br/>";
-        if ($test){ # Unico IF (Sólo para dar formato al salto de linea)
+        if ($es_test){ # Unico IF (Sólo para dar formato al salto de linea)
             $salto_linea = "\n";
         }
         foreach ($this->valores as $num) {
